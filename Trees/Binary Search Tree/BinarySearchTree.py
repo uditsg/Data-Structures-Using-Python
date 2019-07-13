@@ -48,12 +48,9 @@ def NextSuccessor(root):
 
 'Deletes the matched node with the key supplied'      
 def Delete(root,key):
-    i=0
     
     #Base Case
     if root is None:
-        print('we are here for',i)
-        i+=1
         return root
    #Iterate recursively over left child of the node if key < current node value
     if key < root.key:
