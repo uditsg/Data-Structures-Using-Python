@@ -1,3 +1,6 @@
+class LinkedListException(Exception):
+    pass
+
 class Node:
 
     def __init__(self,data):
@@ -28,8 +31,11 @@ class DoublyLinkedList:
     def PrintList(self):
 
         if self.head is None:
-            print("List is empty")
-            return
+            try:
+                raise LinkedListException("List is empty")
+            except LinkedListException as msg:
+                print(msg)
+                return
         else:
             temp = self.head
             while temp is not None:
@@ -39,7 +45,10 @@ class DoublyLinkedList:
     def AddNodeAfterKey(self,data,key):
 
         if self.head == None:
-            print("List is empty")
+            try:
+                raise LinkedListException("List is empty")
+            except LinkedListException as msg:
+                print(msg)
         else:
             temp = self.head
             new_node = Node(data)
@@ -57,12 +66,19 @@ class DoublyLinkedList:
                 temp.next = new_node
                 new_node.prev = temp
             else:
-                print("List does not have key")
+                try:
+                    raise LinkedListException("List does not have key")
+                except LinkedListException as msg:
+                    print(msg)
+                    
 
     def DeleteNode(self,key):
         if self.head == None:
-            print("List is empty. Nothing to delete")
-            return
+            try:
+                raise LinkedListException("List is empty. Nothing to delete")
+            except LinkedListException as msg:
+                print(msg)
+                return
         else:
             temp = self.head
             #If the node to be deleted is first node
