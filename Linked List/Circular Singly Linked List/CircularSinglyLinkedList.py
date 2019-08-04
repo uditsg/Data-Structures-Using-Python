@@ -1,3 +1,6 @@
+class LinkedListException(Exception):
+    pass
+
 class Node:
     def __init__(self,data):
         self.next = None
@@ -52,14 +55,20 @@ class CircularLinkedList:
                 return
             else:
                 temp = temp.next
-        print("Key not found")
-        return
+        try:
+            raise LinkedListException("Key not found")
+        except LinkedListException as msg:
+            print(msg)
+            return
 
     def DelNode(self,key):
         
         if self.last is None:
-            print ("List is empty cannot delete")
-            return
+            try:
+                raise LinkedListException("List is empty cannot delete")
+            except LinkedListException as msg:
+                print(msg)
+                return
         
         temp = self.last
 
@@ -81,16 +90,23 @@ class CircularLinkedList:
             self.last = temp
             return
         else:
-            print("Key not present")
-            return
+            try:
+                raise LinkedListException("Key not present")
+            except LinkedListException as msg:
+                print(msg)
+                return             
+            
         
         
         
             
     def PrintList(self):
         if self.last is None :
-            print("List is empty")
-            return
+            try:
+                raise LinkedListException("List is empty")
+            except LinkedListException as msg:
+                print(msg)
+                return
         
         temp = self.last.next
         
