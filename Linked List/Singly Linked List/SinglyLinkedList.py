@@ -1,3 +1,7 @@
+#Exception class for all Linked List Fail Conditions:
+class LinkedListException(Exception):
+    pass
+
 #Class to initialize a Singly Linked List and other methods to perform various operations
 class LinkedList:
     
@@ -37,17 +41,24 @@ class LinkedList:
                 
         #Two possibilities : Either no node matches key or Linked List is empty.        
         if(self.head is not None):
-            print("Node cannot be inserted as Key is not present")
+            try:
+                raise LinkedListException("Node cannot be inserted as Key is not present")
+            except LinkedListException as error:
+                print(error)
+                
             
         #If Linked List is empty, create a new one with the data passed.
         else:
-            print("No nodes present. Creating a new list with the key hence")
-            self.InsertNodeAtHead(data)
+            try:
+                raise LinkedListException("No nodes present. Creating a new list with the data hence")
+            except LinkedListException as msg:
+                print(msg)
+                self.InsertNodeAtHead(data)
 
 
     def DeleteNode(self,key):
         temp = self.head
-        while(temp is not None):
+        while(temp.next is not None):
             #If key is the first node
             if (temp.data == key):
                 self.head = temp.next
@@ -60,7 +71,10 @@ class LinkedList:
             
             else:
                 temp = temp.next
-        print("Node to be deleted is not present")
+        try:
+            raise LinkedListException("Node to be deleted is not present")
+        except LinkedListException as error:
+            print(error)
             
 
 #Class to initialize a node with the given data
@@ -104,5 +118,6 @@ if __name__=='__main__':
     print("After deleting yoyo")
     Llist.DeleteNode('yoyo')
     Llist.PrintList()
+    Llist.DeleteNode('yoyo')
    
         
