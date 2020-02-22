@@ -1,53 +1,54 @@
-#Exception class for all Linked List Fail Conditions:
+# Exception class for all Linked List Fail Conditions:
 class LinkedListException(Exception):
     pass
 
-#Class to initialize a Singly Linked List and other methods to perform various operations
+
+# Class to initialize a Singly Linked List and other methods to perform various operations
 class LinkedList:
-    
+
     def __init__(self):
         self.head = None
- 
+
     def PrintList(self):
         temp = self.head
-        while(temp is not None):
-            print (temp.data)
+        while (temp is not None):
+            print(temp.data)
             temp = temp.next
 
-    def InsertNodeAtHead(self,data):
+    def InsertNodeAtHead(self, data):
         new_node = Node(data)
         new_node.next = self.head
         self.head = new_node
 
-    def InsertNodeAtEnd(self,data):
+    def InsertNodeAtEnd(self, data):
         new_node = Node(data)
         temp = self.head
-        while(temp.next is not None):
+        while (temp.next is not None):
             temp = temp.next
         temp.next = new_node
         new_node.next = None
 
-    #Method will insert node next to the match i.e. on the right side    
-    def InsertNodeAtMatch(self,data,key):
+    # Method will insert node next to the match i.e. on the right side
+    def InsertNodeAtMatch(self, data, key):
         temp = self.head
-        while(temp is not None):
-            if(temp.data == key):
+        while temp is not None:
+            if temp.data == key:
                 new_node = Node(data)
                 new_node.next = temp.next
                 temp.next = new_node
                 return
             else:
                 temp = temp.next
-                
-        #Two possibilities : Either no node matches key or Linked List is empty.        
-        if(self.head is not None):
+
+        # Two possibilities : Either no node matches key or Linked List is empty.
+        if self.head is not None:
             try:
                 raise LinkedListException("Node cannot be inserted as Key is not present")
             except LinkedListException as error:
                 print(error)
-                
-            
-        #If Linked List is empty, create a new one with the data passed.
+
+
+        # If Linked List is empty, create a new one with the data passed.
         else:
             try:
                 raise LinkedListException("No nodes present. Creating a new list with the data hence")
@@ -55,43 +56,40 @@ class LinkedList:
                 print(msg)
                 self.InsertNodeAtHead(data)
 
-
-    def DeleteNode(self,key):
+    def DeleteNode(self, key):
         temp = self.head
-        while(temp.next is not None):
-            #If key is the first node
-            if (temp.data == key):
+        while temp.next is not None:
+            # If key is the first node
+            if temp.data == key:
                 self.head = temp.next
                 return
-            
-            #If key is any other node including the last one
-            elif (temp.next.data == key ):
+
+            # If key is any other node including the last one
+            elif temp.next.data == key:
                 temp.next = temp.next.next
                 return
-            
+
             else:
                 temp = temp.next
         try:
             raise LinkedListException("Node to be deleted is not present")
         except LinkedListException as error:
             print(error)
-            
 
-#Class to initialize a node with the given data
+
+# Class to initialize a node with the given data
 class Node:
 
-    def __init__(self,data):
+    def __init__(self, data):
         self.data = data
         self.next = None
 
 
-
-#Driver Code to test the above    
-if __name__=='__main__':
-
-    #Methods can be invoked in any order
+# Driver Code to test the above
+if __name__ == '__main__':
+    # Methods can be invoked in any order
     Llist = LinkedList()
-    Llist.InsertNodeAtMatch(24,90)
+    Llist.InsertNodeAtMatch(24, 90)
     print("after process")
     Llist.PrintList()
     print("begin")
@@ -103,10 +101,10 @@ if __name__=='__main__':
     Llist.InsertNodeAtHead(34)
     Llist.InsertNodeAtEnd(90)
     Llist.PrintList()
-    Llist.InsertNodeAtMatch(24,90)
+    Llist.InsertNodeAtMatch(24, 90)
     print("after process")
     Llist.PrintList()
-    Llist.InsertNodeAtMatch('yoyo',2)
+    Llist.InsertNodeAtMatch('yoyo', 2)
     print("after process")
     Llist.PrintList()
     print("After deleting 90")
@@ -119,5 +117,3 @@ if __name__=='__main__':
     Llist.DeleteNode('yoyo')
     Llist.PrintList()
     Llist.DeleteNode('yoyo')
-   
-        
